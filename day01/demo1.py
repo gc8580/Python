@@ -64,15 +64,49 @@ print(bool(()))
 print(bool(tuple()))
 print(bool({}))
 
-num = int(input('请输出一个整数：'))
+# num = int(input('请输出一个整数：'))
+#
+# if num % 2 == 0 :
+#     print(num,'是偶数')
+# else :
+#     print(num,'不是偶数')
+#
+# answer = input('请问您是会员吗？y/n :')
+# if answer == 'y':
+#     pass
+# else :
+#     pass
 
-if num % 2 == 0 :
-    print(num,'是偶数')
-else :
-    print(num,'不是偶数')
+sum=0
 
-answer = input('请问您是会员吗？y/n :')
-if answer == 'y':
-    pass
-else :
-    pass
+for item in range(1,101):
+
+    if item%2==0:
+
+        sum+=item
+
+print(sum)
+
+
+for item in range(1,51):
+
+    if item % 5 == 0:
+
+        print(item)
+
+#使用continue语句
+
+for item in range(1,51):
+
+    if item % 5 != 0:
+
+        continue
+
+print(item)
+
+for i in range(1,4): #行数，执行三次，一次一行
+
+    for j in range(1,5):
+        print('*',end='\t') #末尾换行改为水平制表符，避免换行
+
+    print()
