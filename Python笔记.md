@@ -649,3 +649,295 @@ print(100 in lst)
 print(10 not in lst) 
 ```
 
+### 列表元素的增加 
+
+​	1.append()
+
+​		在列表的末尾添加一个元素 
+
+```python
+lst=[10,20,30]
+
+print('添加元素之前',lst,id(lst))
+
+lst.append(100)
+
+print('添加元素之后',lst,id(lst)) 
+```
+
+​	2.extend() 
+
+​		在列表的末尾至少添加一个元素	
+
+```python
+lst2=['hello','world']
+
+lst.extend(lst)
+
+print(lst) 
+```
+
+​	3.insert() 
+
+​		 在列表的任意位置添加一个元素
+
+```python
+lst.insert(1,90)
+
+print(lst) 
+```
+
+​	4.切片
+
+​		 在列表的任意位置至少添加一个元素
+
+```python
+lst3=[True,False,'hello']
+
+lst[1:]=lst3
+
+print(lst) 
+```
+
+### 列表元素的删除
+
+​	1.remove()
+
+​		一次删除一个元素，重复元素只删除第一个
+
+```python
+lst=[10,20,30,40,50,60,30]
+
+lst.remove(30)
+
+print(lst) 
+#从列表中移除一个元素，如果有重复元素只移除第一个
+```
+
+​	2.pop()
+
+​		删除一个指定索引位置上的元素，不指定索引则删除列表最后一个元素 
+
+```python
+lst.pop(1)
+
+print(lst) 
+```
+
+​	3.切片
+
+​		一次至少删除一个元素（会产生一个新的列表对象）
+
+```python
+new_list=lst[1:3]
+
+print('原列表',lst)
+
+print('切片后的列表',new_list) 
+```
+
+​	4.clear()
+
+​		清空列表 
+
+```python
+lst.clear()
+
+print(lst) 
+```
+
+​	5.del
+
+​		删除列表
+
+```python
+del lst 
+```
+
+### 列表元素的修改 
+
+​	1.为指定索引的元素赋予一个新值
+
+```python
+lst=[10,20,30,40]
+
+lst[2]=100
+
+print(lst) 
+```
+
+​	2.为指定的切片赋予一个新值
+
+```python
+lst[1:3]=[300,400,500,600]
+
+print(lst) 
+```
+
+### 列表元素的排序
+
+1.方法一：调用sort()，列中所有元素默认按照从小到大顺序（升序）排序，可以指定reverse=True进行降序排序
+
+```python
+lst=[20,40,10,98,54]
+
+print('排序前的列表',lst)
+
+#开始排序，默认升序
+
+lst.sort()
+
+print('排序后的列表',lst,id(lst))
+
+#通过指定关键字参数，将列表元素降序排序
+
+lst.sort(reverse=True) #T:降序；F:升序
+
+print(lst)  
+```
+
+2.方法二：调用内置函数sorted()，可以指定reverse=True进行降序排序。该方法会产生新的列表对象，原列表不变
+
+```python
+lst=[20,40,10,98,54]
+
+print('原列表',lst)
+
+#开始排序，默认升序
+
+new_list=sorted(lst)
+
+print(lst)
+
+print(new_list)
+
+#通过指定关键字参数，将列表元素降序排序
+
+desc_list=sorted(lst,reverse=True)
+
+print(desc_list) 
+```
+
+### 列表生成式 
+
+​	语法格式：
+​		[i*i for i in range(1,10)] 
+
+（i*i→表示列元素的表达式	i→自定义变量	range(1,10)→可迭代对象） 
+
+```python
+lst=[i*2 for i in range(1,11)]
+
+print(lst)
+
+#输出[2，4，6，8，10] 
+```
+
+## 字典
+
+![](D:\Github\Python\image\字典.png)
+
+- 内置数据结构之一，与列表同属可变序列
+- 以键值对的方式存储数据，字典是无序序列 
+
+### 字典基础操作
+
+1.字典的创建
+
+```python
+#①大括号{}
+
+	scores={'张三':100,'李四':98,'王五':45}
+
+#②内置函数dict()
+
+	scores=dict(name='jack',age=20)
+```
+
+2.字典中元素的获取
+
+```python
+#①[]
+
+    scores['张三']
+
+	print(scores['张三'])
+
+#	（元素不存在将报错）
+
+#②get()
+
+	scores.get('张三')
+    
+	print(scores.get('张三'))     #输出结果None
+	
+    print(scores.get('张三',99))  #输出结果 99
+#	（元素不存在将输出None） 
+```
+
+3.key的判断
+
+```python
+#①in
+
+print('张三' in scores)
+
+#②not in
+
+print('张三' not in scores) 
+```
+
+4.字典元素的新增/修改
+
+```python
+scores['Jack']=90 
+```
+
+5.字典元素的删除
+
+```python
+del scores['张三'] 
+```
+
+### 获取字典视图
+
+​	1.keys()
+
+​		获取字典中所有key
+
+```python
+keys=scores.keys()
+
+print(keys)
+
+print(type(keys))
+
+print(list(keys)) 
+```
+
+​	2.values()
+
+​		获取字典中所有value
+
+```python
+values=scores.values()
+
+print(values)
+
+print(type(values))
+
+print(list(values)) 
+```
+
+​	3.items()
+
+​		获取字典中所有key,value对
+
+```python
+items=scores.items()
+
+print(items)
+
+print(list(items)) 
+```
+
