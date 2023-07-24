@@ -912,7 +912,7 @@ print(keys)
 
 print(type(keys))
 
-print(list(keys)) 
+print(list(keys))  #将所有键转换为列表list
 ```
 
 ​	2.values()
@@ -926,7 +926,7 @@ print(values)
 
 print(type(values))
 
-print(list(values)) 
+print(list(values)) #将所有值转换为列表list
 ```
 
 ​	3.items()
@@ -938,6 +938,758 @@ items=scores.items()
 
 print(items)
 
-print(list(items)) 
+print(list(items)) #将所有键值对转换为列表list
 ```
+
+### 字典元素的遍历
+
+for item in scores:
+        print(item) 
+
+```python
+scores={'张三':100,'李四':98,'王五':45}
+
+for item in scores:
+
+  print(item,scores[item],scores.get(item)) 
+```
+
+### 字典生成式 
+
+- 内置函数zip() 
+- item.upper(): price for item,price in zip(items,prices)
+
+```python
+items=['Fruits','Book','Others']
+
+prices=[96,78,85]
+
+d={item. upper():price for item, price in zip(items,prices)}
+
+print(d) 
+```
+
+![](D:\Github\Python\image\字典的特点（总结）.png)
+
+## 元组
+
+Python内置的数据结构之一，是一个不可变数列 
+
+### 元组创建方式
+
+​	1.小括号**()**
+
+```python
+t1=('Python','world',98)
+
+print(t1)
+
+print(type(t1))
+```
+
+​	2.内置函数**tuple()**
+
+```python
+t2=tuple(('Python','world',98))
+
+print(t2)
+
+print(type(t2))
+```
+
+- 只包含一个元组的元素需要使用逗号和小括号，否则会被误认为int,str等类型
+
+```python
+t3=('Python',)
+
+print(t3)
+
+print(type(t3))
+```
+
+### 元组对象是否可以引用
+
+- 若元组中的对象本身是不可变对象，则不能再引用其他对象
+- 若元组中的对象本身是可变对象，则可变对象的引用不允许改变，但数据可以改变
+
+```python
+t=(10,[20,30],9)
+
+print(t)
+
+print(type(t))
+
+print(t[0],type(t[0]),id(t[0]))
+
+print(t[1],type(t[1]),id(t[1]))
+
+print(t[2],type(t[2]),id(t[2]))
+
+#[1]=100 报错：SyntaxError: cannot assign to literal
+
+t[1].append(100) #向列表中添加元素
+
+print(t,id(t[1])) #列表内存地址不变
+```
+
+### 元组的遍历
+
+​	1.方法一：索引
+
+```python
+t=('Python','world',98)
+
+'''第一种获取元组元素的方式，索引'''
+
+print(t[0])
+
+print(t[1])
+
+print(t[2])
+
+#print(t[3]) IndexError: tuple index out of range
+```
+
+​	2.方法二：遍历
+
+```python
+'''第二种获取元组元素的方式，遍历元组'''
+
+for item in t:
+
+  print(item)
+```
+
+## 集合
+
+![](D:\Github\Python\image\集合1.png)
+
+![](D:\Github\Python\image\集合2.png)
+
+### 集合的创建
+
+​	1.使用**{}**
+
+```python
+s={2,3,4,5,5,6,7,7}
+
+print(s) #不允许重复
+```
+
+​	2.使用内置函数**set()**
+
+```python
+s1=set(range(6))
+
+print(s1,type(s1))
+
+s2=set([1,2,4,5,5,5,6,6])
+
+print(s2,type(s2))
+
+s3=set((1,2,4,4,5,65)) #集合中的元素是无序的
+
+print(s3,type(s3))
+
+s4=set('Python')
+
+print(s4,type(s4))
+```
+
+### 集合基础操作
+
+​	1.判断
+
+​		**①in/not in**
+
+```python
+s={10,20,30,405,60}
+
+print(10 in s)
+
+print(100 in s)
+
+print(50 not in s)
+```
+
+​	2.新增
+
+​		**①add()**
+
+```python
+s.add(80)
+
+print(s)
+```
+
+​		**②update()**
+
+```python
+s.update({200,400,300})
+
+print(s)
+
+s.update([100,123,456])
+
+s.update((12,52,48))
+
+print(s)
+```
+
+​	3.删除
+
+​		**①remove()**
+
+​			一次删除一个指定元素，若指定元素不存在抛出KeyError
+
+​		**②discard()**
+
+​			一次删除一个指定元素，若指定元素不存在不抛异常
+
+​		**③pop()**
+
+​			一次删除一个任意元素
+
+​		**④clear()**
+
+​			清空集合
+
+### 集合间关系判断
+
+1.是否相等
+
+- **==/!=**
+
+```python
+s={10,20,30,40}
+
+s1={30,40,20,10}
+
+print(s==s1) #True
+
+print(s!=s1) #False
+```
+
+2.一个集合是否为另一个集合的子集
+
+- **issubset**
+
+```python
+s1={10,20,30,40,50,60}
+
+s2={10,20,30,40}
+
+s3={10,20,90}
+
+print(s2.issubset(s1)) #True
+
+print(s3.issubset(s1)) #False
+```
+
+3.一个集合是否为另一个集合的超集（母集）
+
+- **issuperset**
+
+```python
+print(s1.issuperset(s2)) #True
+
+print(s1.issuperset(s3)) #False
+```
+
+4.两个集合是否没有交集
+
+- **isdisjioint**
+
+```python
+print(s2.isdisjoint(s3)) #False
+
+s4={100,200,300}
+
+print(s2.isdisjoint(s4)) #True
+```
+
+### 集合的数学操作
+
+- 示意图  **返回值都为Boolean类型**
+
+![](D:\Github\Python\image\集合示意图.png)
+
+1.交集
+
+- **intersection / &**
+
+```python
+s1={10,20,30,40}
+
+s2={20,30,40,50,60}
+
+print(s1.intersection(s2))
+
+print(s1 & s2)
+```
+
+2.并集
+
+- **union / |**
+
+```python
+print(s1.union(s2))
+
+print(s1 | s2) #union=|
+
+print(s1)
+
+print(s2)
+```
+
+3.差集
+
+- **difference / -**
+
+```python
+print(s1.difference(s2))
+
+print(s1-s2) #difference=-
+
+print(s1)
+
+print(s2)
+```
+
+4.对称差集
+
+- **symmetric_difference / ^**
+
+```python
+print(s1.symmetric_difference(s2))
+
+print(s1^s2) #symmetric_difference=^
+```
+
+### 集合生成式
+
+- **{i\*i for i in range()}**
+- 将列表生成式中的[]改为{}即可
+
+```python
+#列表生成式
+
+lst=[i*i for i in range(10)]
+
+print(lst)
+
+#集合生成式
+
+lst={i*i for i in range(10)}
+
+print(lst)
+```
+
+## 四种数据类型的使用场景
+
+ 列表：
+
+- 存储相同类型的数据。
+- 通过迭代遍历，在循环体内部，针对列表中的每一项元素，执行相同的操作。
+
+元组：
+
+- 函数的参数和返回值。
+
+- 格式化字符串，格式化字符串后面的（）本质上就是一个元祖。
+- 让列表不可以修改，保护数据安全。
+
+集合：
+
+- 有序的列表   
+- 使用集合做排行榜等类型的场景   
+
+字典：
+
+- 需要多个键值对，可作为某个事务的说明。
+- 将多个字典放在一个列表中，再进行遍历，再循环体内针对每一个字典进行相同的处理。
+
+![](D:\Github\Python\image\区别1.png)
+
+![](D:\Github\Python\image\总结1.png)
+
+## 字符串
+
+![](D:\Github\Python\image\字符串1.png)
+
+![字符串2](D:\Github\Python\image\字符串2.png)
+
+![字符串3](D:\Github\Python\image\字符串3.png)
+
+### 字符串的创建与滞留机制
+
+- 驻留机制的几种情况：
+
+1.字符串长度为0或1时
+
+2.符合标识符的字符串（字母、数字、下划线）
+
+3.字符串只在编译时驻留，运行时不会
+
+4.[-5，256]之间的整数数字
+
+### 字符串常用操作
+
+#### 1.查询
+
+①**index（）**
+
+​	查找子串substr第一次出现的位置，如果查找的子串不存在时，则抛出ValueError
+
+```python
+s='hello,hello'
+
+print(s.index('lo')) #3
+
+print(s.find('lo')) #3
+
+print(s.rindex('lo')) #9
+
+print(s.rfind('lo')) #9
+```
+
+②**rindex（）**
+
+​	查找子串substr最后一次出现的位置，如果查找的子串不存在时，则抛出ValueError
+
+③**find()**
+
+​	查找子串substr第一次出现的位置，如果查找的子串不存在时，则返回-1
+
+④**rfind()**
+
+​	查找子串substr最后一次出现的位置，如果查找的子串不存在时，则返回-1
+
+#### 2.大小写转换
+
+①**upper()**
+
+​	把字符串中所有字符转成大写字母
+
+```python
+s='hello,python'
+
+a=s.upper() #转成大写后，会产生一个新的字符串对象
+
+print(a,id(a))
+
+print(s,id(s))
+```
+
+②**lower()**
+
+​	把字符串中所有字符转成小写字母
+
+```python
+b=s.lower() #转成小写后，会产生一个新的字符串对象
+
+print(b,id(b))
+
+print(s,id(s))
+
+print(b==s)
+
+print(b is s) #False
+```
+
+③**swapcase()**
+
+​	把字符串中所有大写字母转成小写字母，小写字母转成大写字母
+
+```python
+s2='hello,Python'
+
+print(s2.swapcase())
+```
+
+④**capitalize()**
+
+​	把第一个字符转换为大写，把其余字符转成小写字母
+
+```python
+print(s2.capitalize())
+```
+
+⑤**title()**
+
+​	把每个单词的第一个字符转换为大写，把每个单词的剩余字符转换为小写
+
+```python
+print(s2.title())
+```
+
+#### 3.对齐
+
+①**center()**
+
+​	居中对齐，第一个参数指定宽度，第二个参数指定填充符，第二个参数可选，默认空格，如果设置宽度小于实际宽度则返回原字符串
+
+```python
+s='hello,Python'
+
+print(s.center(20,'*'))
+```
+
+②**ljust()**
+
+​	左对齐，第一个参数指定宽度，第二个参数指定填充符，第二个参数可选，默认空格，如果设置宽度小于实际宽度则返回原字符串
+
+```python
+print(s.ljust(20,'*'))
+
+print(s.ljust(10))
+```
+
+③**rjust()**
+
+​	右对齐，第一个参数指定宽度，第二个参数指定填充符，第二个参数可选，默认空格，如果设置宽度小于实际宽度则返回原字符串
+
+```python
+print(s.rjust(20,'*'))
+
+print(s.rjust(10))
+```
+
+④**zfill()**
+
+​	右对齐，左边用0填充，该方法只接收一个参数，用于指定字符串的宽度，如果指定的宽度小于字符串的长度，则返回字符串本身
+
+```python
+print(s.zfill(20))
+
+print(s.zfill(10))
+
+print('-8910'.zfill(8))
+```
+
+#### 4.劈分
+
+①**split()**
+
+- 从字符串的左边开始劈分，默认的劈分字符是空格字符串，返回的值都是一个列表
+- 以通过参数sep指定劈分字符串是的劈分符
+- 通过参数maxsplit指定劈分字符串时的最大劈分次数，在经过最大次劈分之后，剩余的子串会单独做为一部分
+
+```python
+s='hello world Python'
+
+lst=s.split()
+
+print(lst) #未指定劈分字符，默认空格
+
+s1='hello|world|Python'
+
+print(s1.split(sep='|'))
+
+print(s1.split(sep='|',maxsplit=1))
+```
+
+②**rsplit()**
+
+- 从字符串的右边开始劈分，默认的劈分字符是空格字符串，返回的值都是一个列表
+- 以通过参数sep指定劈分字符串是的劈分符
+- 通过参数maxsplit指定劈分字符串时的最大劈分次数，在经过最大次劈分之后，剩余的子串会单独做为一部分
+
+```python
+print(s.rsplit())
+
+print(s1.rsplit(sep='|'))
+
+print(s1.rsplit(sep='|',maxsplit=1)) #产生区别
+```
+
+#### 5.判断
+
+①**isidentifier()**
+
+判断指定的字符串是不是合法的标识符
+
+②**isspace()**
+
+判断指定的字符串是否全部由空白字符组成(回车、换行，水平制表符)
+
+③**isalpha()**
+
+判断指定的字符串是否全部由字母组成
+
+④**isdecimal()**
+
+判断指定字符串是否全部由十进制的数字组成
+
+⑤**isnumeric()**
+
+判断指定的字符串是否全部由数字组成
+
+⑥**isalnum()**
+
+判断指定字符串是否全部由字母和数字组成
+
+#### 6.替换
+
+- **replace()**
+
+第1个参数指定被替换的子串，第2个参数指定替换子串的字符串，该方法返回替换后得到的字符串，替换前的字符串不发生变化，调用该方法时可以通过第3个参数指定最大替换次数
+
+```python
+s='hello,Python'
+
+print(s.replace('python','Java'))
+
+s1='hello,Python,Python,Python'
+
+print(s1.replace('Python','Java',2))
+```
+
+#### 7.合并
+
+- **join()**
+
+将列表或元组中的字符串合并成一个字符串
+
+```python
+lst=['hello','java','Python']
+
+print('|'.join(lst))
+
+print(''.join(lst))
+
+
+
+t=('hello','Java','Python')
+
+print(''.join(t))
+
+print('*'.join('Python'))
+```
+
+### 字符串的比较操作
+
+- 运算符：**>,>=,<,<=,==,!=**
+- 比较规则
+
+​	首先比较两个字符串中的第一个字符，如果相等则继续比较下一个字符，依次比较下去，直到两个字符串中的字符不相等时，其比较结果就是两个字符串的比较结果，两个字符串中的所有后续字符将不再被比较
+
+- 比较原理
+
+​	两上字符进行比较时，比较的是其ordinal value(原始值)，调用内置函数ord可以得到指定字符的ordinal value。与内置函数ord对应的是内置函数chr调用内置函数chr时指定ordinal value可以得到其对应的字符
+
+```python
+print('apple'>'app')
+
+print('apple'>'banana')
+
+print(ord('a'),ord('b'))
+
+print(chr(97),chr(98))
+```
+
+### 字符串的切片操作
+
+- 字符串是不可变类型；不具备增删改等操作；切片操作将产生新的对象
+
+```python
+s='hello,Python'
+
+s1=s[:5] #未指定起始位置，从0开始切
+
+s2=s[6:] #未指定结束位置，切到字符串最后一个元素
+
+s3='!'
+
+newstr=s1+s3+s2
+
+
+
+print(s1)
+
+print(s2)
+
+print(newstr)
+
+print(id(s))
+
+print(id(s1))
+
+print(id(s2))
+
+print(id(newstr))
+
+
+
+print(s[1:5:1]) #从1开始截到5（不含5），步长1（0→）
+
+print(s[::-1]) #从字符串最后一个元素开始（←-1）
+```
+
+### 格式化字符串
+
+1.**%**作占位符
+
+![](D:\Github\Python\image\格式化字符串1.png)
+
+```python
+name='张三'
+
+age=20
+
+print('我叫%s,今年%d岁' % (name,age))
+```
+
+2.**{}**作占位符
+
+![](D:\Github\Python\image\格式化字符串2.png)
+
+```python
+print('我叫{0},今年{1}岁'.format(name,age))
+```
+
+3.**f-string**
+
+```python
+print(f'我叫{name},今年{age}岁')
+
+
+
+print('%10d' % 99) #10表示的是宽度
+
+print('%.3f' % 3.1415926) #.3表示的是精度（小数点后几位）
+
+print('%10.3f' % 3.1415926) #同时表示宽度和精度
+
+print('{0:.3}'.format(3.1415926)) #此处.3表示一共三位有效数字
+
+print('{0:.3f}'.format(3.1415926)) #此处，.3f表示小数点后三位
+
+print('{:.3f}'.format(3.1415926)) #0表示占位符顺序，可省略
+```
+
+### 字符串的编码转换
+
+- 编码：将字符串转换为二进制数据（bytes）
+- 解码：将bytes类型的数据转换成字符串类型
+
+![](D:\Github\Python\image\字符串编码.png)
+
+```python
+s='天涯共此时'
+
+#编码
+
+print(s.encode(encoding='GBK')) #在GBK这种编码格中，一个中文占两个字节
+
+print(s.encode(encoding='UTF-8')) #在UFT-8这种编码格式中，一个中文占三个字节
+
+#解码
+
+byte=s.encode(encoding='GBK')
+
+print(byte.decode(encoding='GBK'))
+```
+
+**函数**
 

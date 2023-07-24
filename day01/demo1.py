@@ -110,3 +110,8 @@ for i in range(1,4): #行数，执行三次，一次一行
         print('*',end='\t') #末尾换行改为水平制表符，避免换行
 
     print()
+print('-----------------------------------------')
+scores = {'张三': 100, '李四': 98, '王五': 45}
+for item in scores:
+
+    print(item, scores[item], scores.get(item))
